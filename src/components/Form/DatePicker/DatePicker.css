@@ -1,0 +1,4 @@
+
+.ws-field-has-error .ant-calendar-picker:hover .ant-calendar-picker-input:not([disabled]) {
+  border-color: #f04134;
+}

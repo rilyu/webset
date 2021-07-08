@@ -1,0 +1,57 @@
+{
+  "name": "webset",
+  "version": "0.3.1",
+  "description": "webset for react",
+  "main": "lib/index.js",
+  "dependencies": {
+    "antd": "^3.26.16",
+    "crypto-js": "^3.1.9-1",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "smoothscroll-polyfill": "^0.4.4",
+    "store": "^2.0.12"
+  },
+  "resolutions": {
+    "moment": "2.24.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "babel src/components -d lib --copy-files",
+    "build-demo": "react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      "ie 11",
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "ie 11",
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.6.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.2"
+  },
+  "keywords": [
+    "webset",
+    "react",
+    "antd"
+  ],
+  "author": "rilyu",
+  "license": "MIT"
+}

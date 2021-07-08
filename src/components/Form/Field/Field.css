@@ -1,0 +1,80 @@
+
+.ws-field {
+  padding: 6px 6px;
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;  
+}
+
+.ws-field.ws-field-form {
+  padding: 2px 6px;
+}
+
+.ws-field.ws-field-row {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.ws-field .ws-field-title {
+  box-sizing: border-box;
+  font-size: 85%;
+  color: rgba(0,0,0,0.75);
+}
+
+.ws-field.ws-field-row .ws-field-title {
+  min-width: 70px;
+  text-align: right;
+  line-height: 32px;
+  padding-right: 4px;
+}
+
+.ws-field .ws-field-title.ws-field-required:before {
+  display: inline-block;
+  margin-right: 4px;
+  content: "*";
+  font-family: SimSun;
+  line-height: 1;
+  font-size: 85%;
+  color: #f04134;
+}
+
+.ws-field .ws-field-detail-container {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ws-field .ws-field-detail-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+}
+
+.ws-field .ws-field-detail-row > *:first-child {
+  flex: 1;
+  overflow: hidden;
+}
+
+.ws-field .ws-field-detail {
+  flex: 1;
+  line-height: 32px;
+  min-height: 32px;
+  padding: 0 4px;
+}
+
+.ws-field .ws-field-tail {
+  margin-left: 6px;
+}
+
+.ws-field .ws-field-error {
+  display: none;
+}
+
+.ws-field.ws-field-form .ws-field-error {
+  display: block;
+  color: #f04134;
+  min-height: 18px;
+  font-size: 75%;
+}

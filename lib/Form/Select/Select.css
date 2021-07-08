@@ -1,0 +1,11 @@
+
+.ws-field-has-error .ant-select .ant-select-selection,
+.ws-field-has-error .ant-select .ant-select-selection:hover {
+  border-color: #f04134;
+}
+
+.ws-field-has-error .ant-select-focused .ant-select-selection:focus {
+  border-color: #f46e65;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(240, 65, 52, 0.2);
+}

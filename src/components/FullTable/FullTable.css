@@ -1,0 +1,42 @@
+
+.ws-full-table-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ws-full-table {
+  min-width: 100%;
+}
+
+.ws-full-table .ant-table {
+  border: none;
+}
+
+.ws-full-table .ant-table.ant-table-bordered .ant-table-content {
+  border-right: none;
+}
+
+.ws-full-table-footer {
+  padding: 4px 12px;
+  min-height: 37px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  transform: translateY(-1px);
+}
+
+.ws-full-table-footer .ant-pagination-item-active,
+.ws-full-table-footer .ant-pagination-item-active:focus,
+.ws-full-table-footer .ant-pagination-item-active:hover {
+  border-color: transparent;
+  font-weight: bold;
+}
+
+.ws-full-table-footer .ant-select-selection,
+.ws-full-table-footer .ant-select-selection:hover,
+.ws-full-table-footer .ant-select-selection:hover {
+  border-color: transparent;
+}

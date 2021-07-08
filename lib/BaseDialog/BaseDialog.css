@@ -1,0 +1,81 @@
+
+.ws-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 注: 不能使用 justify-content center ，否则会导致超出内容上部无法滚动显示，这里在 .ant-modal 加 margin: auto 实现上下居中 */
+}
+
+.ws-dialog .ws-dialog-content-container {
+  position: relative;
+  min-height: 60px;
+  box-sizing: border-box;
+}
+
+.ant-modal-wrap.ws-dialog-full .ws-dialog-content-container:after {
+  content: "";
+  display: block;
+  height: 24px;
+  width: 100%;
+}
+
+.ws-dialog .ws-dialog-loading {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,0.4);
+  color: #989898;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ws-dialog .ant-modal {
+  top: 0;
+  margin: auto;
+  padding: 12px;
+}
+
+.ant-modal-wrap.ws-dialog-full .ant-modal {
+  top: 0px;
+  height: 100%;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-modal-wrap.ws-dialog-full .ant-modal .ant-modal-content {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ant-modal-wrap.ws-dialog-full .ant-modal .ant-modal-content .ant-modal-body {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.ws-dialog-full-body .ant-modal-body {
+  padding: 0;
+}
+
+.ws-dialog-content-container > .anticon {
+  float: left;
+  margin-right: 16px;
+  font-size: 22px;
+}
+.ws-dialog-confirm-icon {
+  color: #faad14;
+}
+
+/* 修复底部按钮使用 href 时按钮间距失效的 bug  */
+.ant-modal-footer .ant-btn + .ant-btn {
+  margin-bottom: 0;
+  margin-left: 8px;
+}

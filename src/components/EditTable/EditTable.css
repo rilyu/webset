@@ -1,0 +1,58 @@
+
+.ws-edit-table {
+}
+.ws-edit-table .ant-table-thead > tr,
+.ws-edit-table .ant-table-tbody > tr,
+.ws-edit-table .ant-table-thead > tr > th,
+.ws-edit-table .ant-table-tbody > tr > td {
+  transition: unset;
+}
+.ws-edit-row > td {
+  background-color: #fff !important;
+  padding: 0 !important;
+}
+.ws-edit-row > td > .ws-edit-cell-static {
+  padding: 8px 8px;
+}
+.ws-edit-row .ant-input,
+.ws-edit-row .ant-select,
+.ws-edit-row .ant-select-selection--single {
+  height: calc(1.5em + 16px);
+  border: none;
+}
+.ws-edit-cell-error {
+  position: relative;
+}
+.ws-edit-cell-error:after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  border: 1px solid #f04134;
+  border-radius: 4px;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.ws-edit-row .ant-select-selection__rendered {
+  line-height: calc(1.5em + 16px);
+}
+.ws-edit-row .ant-input:focus,
+.ws-edit-row .ant-select:focus,
+.ws-edit-row .ant-select-selection:focus,
+.ws-edit-row .ant-select-open .ant-select-selection {
+  box-shadow: none;
+}
+.ws-edit-table .ws-field {
+  padding: 0;
+  width: 100%;
+}
+
+.ws-edit-table-ellipsis-cell {
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

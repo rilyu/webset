@@ -1,0 +1,71 @@
+
+.ws-app-header {
+  height: 50px;
+  padding: 0 24px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.75);
+  background-color: #373d41;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ws-app-logo {
+  height: 32px;
+  width: auto;
+}
+
+.ws-app-title-container {
+  margin: 0 8px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ws-app-title {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.ws-app-sub-title {
+  padding-top: 2px;
+  font-size: 10px;
+  line-height: 10px;
+}
+
+.ws-app-header-content {
+  flex: 1;
+}
+
+.ws-app-header-user span {
+  padding: 0px 12px 0px 4px;
+}
+
+/* 深色 Header 菜单 文字显示为白色 */
+
+.ws-app-header .ant-menu {
+  background-color: transparent;
+}
+
+.ws-app-header .ant-menu.ant-menu-horizontal {
+  border-bottom: none;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ws-app-header .ant-menu.ant-menu-horizontal > .ant-menu-submenu-selected,
+.ws-app-header .ant-menu.ant-menu-horizontal > .ant-menu-item-selected {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ws-app-header .ant-menu.ant-menu-horizontal > .ant-menu-submenu:hover,
+.ws-app-header .ant-menu.ant-menu-horizontal > .ant-menu-item:hover,
+.ws-app-header .ant-menu.ant-menu-horizontal > .ant-menu-submenu-active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.ws-app-header .ant-menu.ant-menu-horizontal > .ant-menu-submenu-horizontal > .ant-menu-submenu-title:hover {
+  color: #fff;  
+}
+

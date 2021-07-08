@@ -1,0 +1,11 @@
+
+.ws-scroll-view {
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.ws-scroll-view::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+

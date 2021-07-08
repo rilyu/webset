@@ -1,0 +1,17 @@
+
+.ws-field .ws-field-checkbox {
+  color: rgba(0,0,0,0.75);
+}
+
+.ant-row-flex > .ws-field:not(:only-child) .ws-field-checkbox {
+  line-height: 32px;
+}
+
+.ws-field .ws-field-checkbox.ws-field-required:after {
+  display: inline-block;
+  margin-left: 4px;
+  content: "*";
+  font-family: SimSun;
+  line-height: 1;
+  color: #f04134;
+}

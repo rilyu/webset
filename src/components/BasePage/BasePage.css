@@ -1,0 +1,51 @@
+
+.ws-page {
+  padding: 10px 20px;
+}
+
+.ws-page > div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ws-page-empty {
+  margin-top: 50px;
+  color: #ccc;
+  font-size: 48px;
+  text-align: center;
+}
+
+.ws-page-action-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.ant-table-title > .ws-page-action-bar {
+  min-height: 56px;
+}
+.ws-dialog-content-container > .ws-page-action-bar,
+.ws-form > .ws-page-action-bar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ws-page-action-bar > *,
+.ws-page-action-bar > .ant-btn-group + .ant-btn,
+.ws-page-action-bar > .ant-btn + .ant-btn-group,
+.ws-page-action-bar > .ant-btn-group + .ant-btn-group {
+  margin: 2px 4px;
+}
+.ws-page-action-bar > *:first-child {
+  margin-left: 0;
+}
+.ws-page-action-bar > *:last-child {
+  margin-right: 0;
+}
+
+.ws-page-action-bar > div {
+  display: inline-block;
+}
+
+.ws-page-action-bar .ws-form:not(:first-child) {
+  margin-left: 12px;
+}

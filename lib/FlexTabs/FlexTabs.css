@@ -1,0 +1,27 @@
+
+.flex-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-tabs.ant-tabs > .ant-tabs-bar {
+  margin: 0px;
+}
+
+.flex-tabs.ant-tabs > .ant-tabs-content {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.flex-tabs.ant-tabs > .ant-tabs-content > .ant-tabs-tabpane {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.flex-tabs.ant-tabs > .ant-tabs-content > .ant-tabs-tabpane.ant-tabs-tabpane-inactive {
+  flex: 0 0 0%;
+}

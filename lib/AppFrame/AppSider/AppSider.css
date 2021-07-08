@@ -1,0 +1,63 @@
+
+.ws-app-sider {
+  width: 256px;
+  height: 100%;
+  overflow: hidden;
+  background-color: #fff;
+  border-right: 1px solid #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ws-app-sider .ant-menu-inline {
+  border-right: none;
+}
+
+.ws-app-sider-collapsed,
+.ws-app-sider-collapsed .ant-menu-vertical.ant-menu-inline-collapsed, .ant-menu-inline-collapsed {
+  width: 52px;
+}
+
+.ws-app-sider-collapsed .ant-menu-vertical.ant-menu-inline-collapsed > .ant-menu-item,
+.ws-app-sider-collapsed .ant-menu-vertical.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+  padding: 0 18px !important;
+}
+
+.ws-app-sider-scroll-view {
+  flex: 1;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ws-app-sider-trigger {
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+}
+
+.ws-app-sider-trigger:hover {
+  color: #1890ff;
+}
+
+.ws-app-sider-trigger .icon {
+  line-height: 30px;
+}
+
+/* dark mode */
+
+.ws-app-sider.ws-app-sider-dark {
+  background-color: #001529;
+  border-right: none;
+}
+
+.ws-app-sider-dark .ws-app-sider-trigger {
+  color: #aeb9c2;
+}
+
+.ws-app-sider-dark .ws-app-sider-trigger:hover {
+  color: #fff;
+}

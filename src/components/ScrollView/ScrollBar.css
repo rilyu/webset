@@ -1,0 +1,116 @@
+
+/* position */
+
+.ws-scrollbar-container {
+  width: 0;
+  height: 0;
+  line-height: 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+/* scrollbar */
+
+.ws-scrollbar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  user-select: none;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.ws-scrollbar-vertical {
+}
+
+.ws-scrollbar-horizontal {
+}
+
+.ws-scrollbar-hover {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.ws-scroll-view:hover > .ws-scrollbar-container > .ws-scrollbar-hover,
+.ws-scrollbar-hover.ws-scrollbar-draging-vertical,
+.ws-scrollbar-hover.ws-scrollbar-draging-horizontal {
+  opacity: 1;
+}
+
+/* track */
+
+.ws-scrollbar-track {
+  font-size: 0;
+  background-color: rgba(224,224,224,0.4);
+}
+
+.ws-scrollbar-vertical .ws-scrollbar-track {
+  width: 8px;
+  height: 100%;
+  text-align: center;
+}
+
+.ws-scrollbar-horizontal .ws-scrollbar-track {
+  width: 100%;
+  height: 8px;
+  line-height: 8px;
+}
+
+.ws-scrollbar.ws-scrollbar-has-corner.ws-scrollbar-vertical {
+  padding-bottom: 8px;
+}
+
+.ws-scrollbar.ws-scrollbar-has-corner.ws-scrollbar-horizontal {
+  padding-right: 8px;
+}
+
+/* thumb */
+
+.ws-scrollbar-thumb {
+  display: inline-block;
+  margin: auto;
+  background-color: rgba(194,194,194,0.5);
+  border-radius: 999px;
+}
+
+.ws-scrollbar-thumb:hover,
+.ws-scrollbar-vertical.ws-scrollbar-draging-vertical .ws-scrollbar-thumb,
+.ws-scrollbar-horizontal.ws-scrollbar-draging-horizontal .ws-scrollbar-thumb {
+  background-color: rgba(127,127,127,0.75);
+}
+
+.ws-scrollbar-vertical .ws-scrollbar-thumb {
+  width: 8px;
+  min-height: 16px;
+}
+
+.ws-scrollbar-horizontal .ws-scrollbar-thumb {
+  height: 8px;
+  min-width: 16px;
+  vertical-align: middle;
+}
+
+/* track piece */
+
+.ws-scrollbar-track-piece {
+  display: inline-block;
+  background-color: transparent;
+}
+
+.ws-scrollbar-vertical .ws-scrollbar-track-piece {
+  width: 100%;
+}
+
+.ws-scrollbar-horizontal .ws-scrollbar-track-piece {
+  height: 100%;
+  vertical-align: middle;
+}
+
+/* corner */
+
+.ws-scrollbar-corner {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(224,224,224,0.4);
+}

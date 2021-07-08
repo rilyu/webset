@@ -1,0 +1,22 @@
+
+.ws-field.ws-field-row.ws-field-text .ws-field-title {
+  line-height: 20px;
+}
+
+.ws-field.ws-field-text .ws-field-detail {
+  line-height: 20px;
+  min-height: 20px;
+  padding: 0 4px;
+  margin: 0;
+}
+
+.ws-field.ws-field-text .ws-field-detail.ws-field-text-collapse {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+}
+
+.ws-field .ws-field-detail.ws-field-text-underline {
+  border-bottom: 1px solid #eee;
+}
+
