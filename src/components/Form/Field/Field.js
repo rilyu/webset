@@ -1,5 +1,4 @@
 // Field.js
-/* eslint react/forbid-foreign-prop-types: 0 */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,8 +15,8 @@ export default class Field extends React.Component {
   static contextType = AppContext;
 
   // *** 在此定义的全部属性均不会传递给 detail 组件
-  static propTypes = {
-    ...Col.propTypes,
+  static colPropKeySet = ['span', 'order', 'offset', 'push', 'pull', 'className', 'children', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'].reduce((result, item) => Object.assign(result, {[item]: true}), {});
+  static fieldPropTypes = {
     mode: PropTypes.oneOf(['form', 'edit', 'view', 'string']), // 默认取 form.mode ， form.mode 未定义则默认为 edit
     title: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     titleStyle: PropTypes.object,
@@ -27,6 +26,10 @@ export default class Field extends React.Component {
     verify: PropTypes.bool, //verify: 是否校验，为true调用verifier校验，不设置时取context.defaultVerify值，默认不设置
     verifier: PropTypes.func, //verifier: 校验器，函数参数为(field)，返回错误字符串，不设置时取context.defaultVerifier值
     // value 、 defaultValue 也是公共属性，但需要放在 otherProps 中，因此不能在此定义
+  };
+  static propTypes = {
+    ...Col.propTypes,
+    ...this.fieldPropTypes,
   };
 
   // *** 默认属性应在 initProps 定义以使得可以合并 Form.fieldProps
@@ -62,8 +65,9 @@ export default class Field extends React.Component {
     this.colProps = {};
     this.otherProps = {};
     for (let key in this.mergeProps) {
-      if (key === 'className' || Field.propTypes[key] === undefined) this.otherProps[key] = this.mergeProps[key];
-      else if (Col.propTypes[key] !== undefined) this.colProps[key] = this.mergeProps[key];
+      if (key === 'className') this.otherProps[key] = this.mergeProps[key]; // className属性用于detail
+      else if (this.constructor.colPropKeySet[key]) this.colProps[key] = this.mergeProps[key];
+      else if (this.constructor.fieldPropTypes[key] === undefined) this.otherProps[key] = this.mergeProps[key];
     }
   }
 
@@ -151,4 +155,3 @@ export default class Field extends React.Component {
     );
   }
 }
-

@@ -57,6 +57,7 @@ export default class FullTable extends React.Component {
     return (
       <HoldTable
         className={`ws-full-table ${className || ''}`}
+        style={{maxWidth: clientWidth}}
         holdHeight={holdHeight}
         scroll={{x: clientWidth - 16, y: holdHeight, ...scroll}}
         pagination={false}
