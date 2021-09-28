@@ -93,7 +93,7 @@ export default class Navigator {
 
   open(uri) {
     let [path, queryString] = (uri || '').split('?');
-    let {pageSet} = this.state;
+    let {activePath, pageSet} = this.state;
     let page = pageSet[path];
     if (page) {
       page.uri = uri;
@@ -105,7 +105,16 @@ export default class Navigator {
         console.error('页面路由不存在：' + path);
         return null;
       }
-      pageSet[path] = page;
+      if (activePath && pageSet[activePath]) {
+        let array = Object.keys(pageSet).map(key => ({key, value: pageSet[key]}));
+        pageSet = {};
+        for (let item of array) {
+          pageSet[item.key] = item.value;
+          if (item.key === activePath) pageSet[path] = page;
+        }
+      } else {
+        pageSet[path] = page;
+      }
     }
     this.setState({activePath: path, pageSet});
     return page;
@@ -119,8 +128,8 @@ export default class Navigator {
     if (path === activePath) {
       let keys = Object.keys(pageSet)
       let index = keys.indexOf(activePath);
-      if (index + 1 < keys.length) activePath = keys[index + 1];
-      else if (index - 1 >= 0) activePath = keys[index - 1];
+      if (index - 1 >= 0) activePath = keys[index - 1];
+      else if (index + 1 < keys.length) activePath = keys[index + 1];
       else activePath = null;
     }
     this.emit('pageClose', pageSet[path]);
