@@ -59,7 +59,7 @@
   z-index: 1;
 }
 
-.ws-full-screen.ws-app-tabs > .ant-tabs-bar {
+.ws-full-screen.ws-app-tabs.ws-app-tabs-bar-auto > .ant-tabs-bar {
   position: absolute;
   left: 0;
   top: 0;
@@ -68,7 +68,6 @@
   transform: translateY(0);
   transition: transform 0.3s;
 }
-
-.ws-full-screen.ws-app-tabs-bar-hide > .ant-tabs-bar {
+.ws-full-screen.ws-app-tabs.ws-app-tabs-bar-auto.ws-app-tabs-bar-hide > .ant-tabs-bar {
   transform: translateY(-100%);
 }
