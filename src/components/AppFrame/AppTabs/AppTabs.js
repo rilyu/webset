@@ -15,8 +15,10 @@ export default class AppTabs extends React.Component {
   static propTypes = {
     type: PropTypes.oneOf(['line', 'card']),
     navigator: PropTypes.object.isRequired,
+    fullScreen: PropTypes.bool,
     fullScreenAble: PropTypes.bool,
     fullScreenBar: PropTypes.oneOf(['auto', 'show', 'hide']),
+    onFullScreen: PropTypes.func, // (fullScreen)
   };
 
   static defaultProps = {
@@ -42,8 +44,12 @@ export default class AppTabs extends React.Component {
     window.removeEventListener('mousemove', this.mouseMoveHandler);
   }
 
+  get fullScreen() {
+    return this.props.fullScreen === undefined ? this.state.fullScreen : this.props.fullScreen;
+  }
+
   onMouseMove(e) {
-    if (!this.state.fullScreen || this.props.fullScreenBar !== 'auto') return;
+    if (!this.fullScreen || this.props.fullScreenBar !== 'auto') return;
     let {clientX, clientY} = e;
     let {left, top, right} = this.flexTabs ? ReactDOM.findDOMNode(this.flexTabs).getBoundingClientRect() : {left: 0, top: 0, right: 0};
 
@@ -105,13 +111,13 @@ export default class AppTabs extends React.Component {
   }
 
   renderTabBarExtraContent() {
-    let {fullScreenAble, fullScreenBar, tabBarExtraContent} = this.props;
-    let {fullScreen} = this.state;
+    let {fullScreenAble, fullScreenBar, tabBarExtraContent, onFullScreen} = this.props;
     if (!fullScreenAble) return tabBarExtraContent;
 
+    let fullScreen = this.fullScreen;
     let onClick = () => {
       fullScreen = !fullScreen;
-      this.setState({fullScreen, hideBar: fullScreenBar === 'hide'});
+      this.setState({fullScreen, hideBar: fullScreenBar === 'hide'}, () => onFullScreen && onFullScreen(fullScreen));
       if (fullScreen && fullScreenBar === 'auto') setTimeout(() => this.setState({hideBar: true}), 500);
     };
     return (
@@ -126,10 +132,10 @@ export default class AppTabs extends React.Component {
 
   render() {
     let {navigator, fullScreenAble, fullScreenBar, activeKey, type, tabBarExtraContent, className, children, onChange, ...others} = this.props;
-    let {fullScreen, hideBar} = this.state;
+    let {hideBar} = this.state;
     let {activePath, pageSet} = navigator.state;
     let pageSetClassName = pageSet[activePath] && pageSet[activePath].options.grayTab ? 'ws-app-tabs-gray' : '';
-    let fullScreenClassName = `${fullScreen ? 'ws-full-screen' : ''} ${fullScreenBar === 'hide' || hideBar ? 'ws-app-tabs-bar-hide' : ''}`;
+    let fullScreenClassName = `${this.fullScreen ? 'ws-full-screen' : ''} ${fullScreenBar === 'show' ? '' : 'ws-app-tabs-bar-auto'} ${fullScreenBar === 'hide' || hideBar ? 'ws-app-tabs-bar-hide' : ''}`;
     return (
       <FlexTabs
         className={`ws-app-tabs ${pageSetClassName} ${fullScreenClassName} ${className || ''}`}
