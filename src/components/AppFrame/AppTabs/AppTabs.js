@@ -1,9 +1,10 @@
 // AppTabs.js
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import {Dropdown, Menu, Icon} from 'antd';
+import {Dropdown, Menu, Icon, Button} from 'antd';
 import FlexTabs from '../../FlexTabs/FlexTabs';
 import ScrollView from '../../ScrollView/ScrollView';
 
@@ -14,11 +15,52 @@ export default class AppTabs extends React.Component {
   static propTypes = {
     type: PropTypes.oneOf(['line', 'card']),
     navigator: PropTypes.object.isRequired,
+    fullScreenAble: PropTypes.bool,
+    fullScreenBar: PropTypes.oneOf(['auto', 'show', 'hide']),
   };
 
   static defaultProps = {
     type: 'card',
+    fullScreenAble: false,
+    fullScreenBar: 'show',
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      fullScreen: false,
+      hideBar: false,
+    };
+  }
+
+  componentDidMount() {
+    this.mouseMoveHandler = e => this.onMouseMove(e);
+    this.mouseMoveHandler = window.addEventListener('mousemove', this.mouseMoveHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('mousemove', this.mouseMoveHandler);
+  }
+
+  onMouseMove(e) {
+    if (!this.state.fullScreen || this.props.fullScreenBar !== 'auto') return;
+    let {clientX, clientY} = e;
+    let {left, top, right} = this.flexTabs ? ReactDOM.findDOMNode(this.flexTabs).getBoundingClientRect() : {left: 0, top: 0, right: 0};
+
+    if (this.delayShowBarTimer) clearTimeout(this.delayShowBarTimer);
+    if (this.delayHideBarTimer) clearTimeout(this.delayHideBarTimer);
+    this.delayShowBarTimer = null;
+    this.delayHideBarTimer = null;
+    if (this.state.hideBar) {
+      if (clientX >= left && clientX <= right && clientY >= top && clientY <= top + 12) {
+        this.delayShowBarTimer = setTimeout(() => this.setState({hideBar: false}), 500);
+      }
+    } else {
+      if (clientX < left || clientX > right || clientY < top || clientY > top + 37) {
+        this.delayHideBarTimer = setTimeout(() => this.setState({hideBar: true}), 100);
+      }
+    }
+  }
 
   renderTab(key) {
     let {params: {title, icon}, options: {noClose}} = this.props.navigator.state.pageSet[key];
@@ -62,16 +104,41 @@ export default class AppTabs extends React.Component {
     );
   }
 
+  renderTabBarExtraContent() {
+    let {fullScreenAble, fullScreenBar, tabBarExtraContent} = this.props;
+    let {fullScreen} = this.state;
+    if (!fullScreenAble) return tabBarExtraContent;
+
+    let onClick = () => {
+      fullScreen = !fullScreen;
+      this.setState({fullScreen, hideBar: fullScreenBar === 'hide'});
+      if (fullScreen && fullScreenBar === 'auto') setTimeout(() => this.setState({hideBar: true}), 500);
+    };
+    return (
+      <React.Fragment>
+        {tabBarExtraContent}
+        <Button type='link' size='small' icon={fullScreen ? 'switcher' : 'border'} onClick={onClick}>
+          {fullScreen ? '还原' : '全屏'}
+        </Button>
+      </React.Fragment>
+    );
+  }
+
   render() {
-    let {navigator, activeKey, type, className, children, onChange, ...others} = this.props;
+    let {navigator, fullScreenAble, fullScreenBar, activeKey, type, tabBarExtraContent, className, children, onChange, ...others} = this.props;
+    let {fullScreen, hideBar} = this.state;
     let {activePath, pageSet} = navigator.state;
+    let pageSetClassName = pageSet[activePath] && pageSet[activePath].options.grayTab ? 'ws-app-tabs-gray' : '';
+    let fullScreenClassName = `${fullScreen ? 'ws-full-screen' : ''} ${fullScreenBar === 'hide' || hideBar ? 'ws-app-tabs-bar-hide' : ''}`;
     return (
       <FlexTabs
-        className={`ws-app-tabs ${pageSet[activePath] && pageSet[activePath].options.grayTab ? 'ws-app-tabs-gray' : ''} ${className || ''}`}
+        className={`ws-app-tabs ${pageSetClassName} ${fullScreenClassName} ${className || ''}`}
         activeKey={activePath}
-        onChange={activeKey => navigator.switchTo(activeKey)}
         type={type}
+        tabBarExtraContent={this.renderTabBarExtraContent()}
+        onChange={activeKey => navigator.switchTo(activeKey)}
         {...others}
+        ref={v => this.flexTabs = v}
       >
         {Object.keys(pageSet).map(key => this.renderPane(key))}
       </FlexTabs>
