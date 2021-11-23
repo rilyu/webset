@@ -81,7 +81,7 @@ export default class CheckboxEnum extends BaseEnum {
   }
 
   renderInput() {
-    let {className, value, valueType, readOnly, selectMode, optionFilterProp, onChange, dataSource, ...others} = this.otherProps;
+    let {className, value, valueType, readOnly, selectMode, pageSize, optionFilterProp, onChange, dataSource, ...others} = this.otherProps;
     let checkWidth = v => {
       let element = v && ReactDOM.findDOMNode(v);
       if (element && element.clientWidth !== this.state.inputWidth) this.setState({inputWidth: element.clientWidth});
