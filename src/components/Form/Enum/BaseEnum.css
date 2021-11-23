@@ -10,7 +10,7 @@
   box-shadow: 0 0 0 2px rgba(240, 65, 52, 0.2);
 }
 
-.ws-select-pagination {
+.ant-select-dropdown-menu-item.ws-select-pagination {
   display: flex;
   flex-direction: row;
   align-items: center;
