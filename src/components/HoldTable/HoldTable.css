@@ -14,3 +14,7 @@
   padding: 32px 0;
   overflow: hidden;
 }
+
+.ant-table-bordered.ant-table-fixed-header .ant-table-scroll .ant-table-header.ant-table-hide-scrollbar::-webkit-scrollbar {
+  border-width: 0 0 1px 0;
+}

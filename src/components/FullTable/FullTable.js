@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import {Pagination} from 'antd';
 
 import HoldTable from '../HoldTable/HoldTable';
+import AnimationFrame from '../ScrollView/AnimationFrame'
 
 import './FullTable.css';
 
@@ -57,7 +58,7 @@ export default class FullTable extends React.Component {
     return (
       <HoldTable
         className={`ws-full-table ${className || ''}`}
-        style={{maxWidth: clientWidth}}
+        style={{maxWidth: clientWidth, maxHeight: clientHeight}}
         holdHeight={holdHeight}
         scroll={{x: clientWidth - 16, y: holdHeight, ...scroll}}
         pagination={false}
@@ -88,7 +89,7 @@ export default class FullTable extends React.Component {
   }
 
   render() {
-    let setLayout = v => {
+    let checkLayout = v => {
       if (!v) return;
       let {clientWidth, clientHeight} = v;
       if (clientWidth !== this.state.clientWidth || clientHeight !== this.state.clientHeight) {
@@ -97,7 +98,8 @@ export default class FullTable extends React.Component {
     };
 
     return (
-      <div className='ws-full-table-container' ref={setLayout}>
+      <div className='ws-full-table-container' ref={v => this.fullTableContainer = v}>
+        <AnimationFrame onEvent={() => checkLayout(this.fullTableContainer)} />
         {this.renderTable()}
         {this.renderPagination()}
       </div>
