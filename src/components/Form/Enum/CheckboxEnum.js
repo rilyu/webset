@@ -17,6 +17,11 @@ export default class CheckboxEnum extends BaseEnum {
     dataSource: PropTypes.arrayOf(PropTypes.shape({id: PropTypes.any, name: PropTypes.string})),
   };
 
+  static defaultProps = {
+    ...BaseEnum.defaultProps,
+    selectMode: 'checkbox', // 原 Select.mode ，可修改为其它值以表现为 BaseEnum 的方式，如传入 null 为默认单选模式
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,8 +32,9 @@ export default class CheckboxEnum extends BaseEnum {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    super.componentDidUpdate && super.componentDidUpdate(prevProps, prevState);
     if (this.props.dataSource !== prevProps.dataSource) {
-      this.setState({data: this.props.dataSource});
+      this.loadData();
     }
   }
 
@@ -102,7 +108,7 @@ export default class CheckboxEnum extends BaseEnum {
     );
   }
 
-  renderDetail() {
+  renderCheckbox() {
     let {readOnly, disabled} = this.otherProps;
     if (readOnly === undefined) readOnly = (this.mergeProps.mode === 'view');
     if (readOnly || disabled) return this.renderInput();
@@ -117,6 +123,10 @@ export default class CheckboxEnum extends BaseEnum {
         {this.renderInput()}
       </Popover>
     );
+  }
+
+  renderDetail() {
+    return (this.otherProps.selectMode === 'checkbox' ? this.renderCheckbox() : super.renderDetail());
   }
 
 }
