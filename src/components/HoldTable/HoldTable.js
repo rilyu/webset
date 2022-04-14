@@ -104,7 +104,7 @@ export default class HoldTable extends React.Component {
       if (!v) return;
       let domNode = ReactDOM.findDOMNode(v);
       let paginationHeight = Math.floor(this.getNodeHeight(domNode.querySelector('ul.ant-pagination.ant-table-pagination')));
-      if (paginationHeight !== this.state.paginationHeight) this.setState({paginationHeight});
+      if (!isNaN(paginationHeight) && paginationHeight !== this.state.paginationHeight) this.setState({paginationHeight});
     };
     return (
       <Table
