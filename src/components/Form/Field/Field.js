@@ -43,10 +43,12 @@ export default class Field extends React.Component {
   }
 
   componentDidMount() {
-    this.formContext.form && this.formContext.form.register(this);
+    this.isMount = true;
+    setTimeout(() => this.isMount && this.formContext.form && this.formContext.form.register(this), 1);
   }
 
   componentWillUnmount() {
+    this.isMount = false;
     this.formContext.form && this.formContext.form.unregister(this);
   }
 
