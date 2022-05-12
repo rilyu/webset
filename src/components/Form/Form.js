@@ -1,6 +1,7 @@
 // Form.js
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import FormContext from './FormContext';
@@ -54,10 +55,14 @@ export default class Form extends React.Component {
   register(field) {
     this.fieldList.indexOf(field) < 0 && this.fieldList.push(field);
     if (field && field.titleElement) {
-      let {width} = field.titleElement.getBoundingClientRect();
-      if (width > this.titleWidth) {
-        this.titleWidth = Math.ceil(width);
-        this.forceUpdate();
+      let domElement = ReactDOM.findDOMNode(field.titleElement);
+      if (domElement) {
+        // 这种方式在父元素存在缩放时不准确 let {width} = domElement.getBoundingClientRect();
+        let width = parseFloat(window.getComputedStyle(domElement).width);
+        if (width > this.titleWidth) {
+          this.titleWidth = Math.ceil(width);
+          this.forceUpdate();
+        }
       }
     }
   }
