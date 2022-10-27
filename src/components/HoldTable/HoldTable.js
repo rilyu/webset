@@ -26,6 +26,7 @@ export default class HoldTable extends React.Component {
     super(props);
     this.state = {
       paginationHeight: 0,
+      shiftKey: false,
     };
     this.FillTable = props => {
       let changeBodyHeight = v => {
@@ -38,6 +39,19 @@ export default class HoldTable extends React.Component {
       };
       return <table {...props} ref={v => changeBodyHeight(v)} />;
     };
+  }
+
+  componentDidMount() {
+    this.isMount = true;
+    this.shiftKeyHandler = e => this.isMount && e.shiftKey !== this.state.shiftKey && this.setState({shiftKey: e.shiftKey});
+    window.addEventListener('keydown', this.shiftKeyHandler);
+    window.addEventListener('keyup', this.shiftKeyHandler);
+  }
+
+  componentWillUnmount() {
+    this.isMount = false;
+    window.removeEventListener('keydown', this.shiftKeyHandler);
+    window.removeEventListener('keyup', this.shiftKeyHandler);
   }
 
   getNodeHeight(node) {
@@ -68,14 +82,6 @@ export default class HoldTable extends React.Component {
   onRow(record, index) {
     let {dataSource, rowKey, rowSelection, rangeSelect} = this.props;
     let {onClick, ...others} = this.props.onRow ? this.props.onRow(record, index) : {};
-    let clearTextSelection = () => {
-      if (window.getSelection) {
-        if (window.getSelection().empty) window.getSelection().empty(); // Chrome
-        else if (window.getSelection().removeAllRanges) window.getSelection().removeAllRanges(); // Firefox
-      } else if (document.selection && document.selection.empty) {  // IE
-        document.selection.empty();
-      }
-    };
     return {
       ...others,
       onClick: e => {
@@ -87,7 +93,6 @@ export default class HoldTable extends React.Component {
             selectedRows.push(dataSource[i]);
           }
           rowSelection && rowSelection.onChange && rowSelection.onChange(selectedRowKeys, selectedRows);
-          clearTextSelection();
         } else {
           this.startIndex = index;
           this.startDataSource = dataSource;
@@ -99,17 +104,19 @@ export default class HoldTable extends React.Component {
   }
 
   render() {
-    let {className, components, locale, rowSelection, rangeSelect, onRow, ...others} = this.props;
+    let {className, style, components, locale, rowSelection, rangeSelect, onRow, ...others} = this.props;
     let calcHeight = v => {
       if (!v) return;
       let domNode = ReactDOM.findDOMNode(v);
       let paginationHeight = Math.floor(this.getNodeHeight(domNode.querySelector('ul.ant-pagination.ant-table-pagination')));
       if (!isNaN(paginationHeight) && paginationHeight !== this.state.paginationHeight) this.setState({paginationHeight});
     };
+
     return (
       <Table
         {...others}
         className={`ws-hold-table ${className || ''}`}
+        style={{...style, userSelect: this.state.shiftKey ? 'none' : undefined}}
         components={{...components, table: this.FillTable}}
         locale={{...locale, emptyText: this.renderEmpty()}}
         rowSelection={rangeSelect ? {...rowSelection, type: 'checkbox'} : rowSelection}

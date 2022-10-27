@@ -6,6 +6,12 @@
 .ant-row-flex > .ws-field:not(:only-child) .ws-field-checkbox {
   line-height: 32px;
 }
+.ant-row-flex > .ws-field.ws-field-small:not(:only-child) .ws-field-checkbox {
+  line-height: 24px;
+}
+.ant-row-flex > .ws-field.ws-field-large:not(:only-child) .ws-field-checkbox {
+  line-height: 40px;
+}
 
 .ws-field .ws-field-checkbox.ws-field-required:after {
   display: inline-block;

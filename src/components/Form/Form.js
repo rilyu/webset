@@ -24,7 +24,7 @@ import './Form.css';
 export default class Form extends React.Component {
 
   static propTypes = {
-    mode: PropTypes.oneOf(['form', 'edit', 'view', 'string']), // form:输入且校验值  edit:输入但不校验值  view:仅显示  string:仅返回值字符串
+    mode: PropTypes.oneOf(['form', 'edit', 'view', 'string', 'concise']), // form:输入且校验值  edit:输入但不校验值  view:仅显示  string:仅返回值字符串  concise:与form相似但不显示错误文本
     fieldProps: PropTypes.object, // 作为 field 的默认属性, Field 属性优先级: get initProps() < Form.props.fieldProps < static defaultProps < props
   };
 

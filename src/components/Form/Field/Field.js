@@ -17,7 +17,7 @@ export default class Field extends React.Component {
   // *** 在此定义的全部属性均不会传递给 detail 组件
   static colPropKeySet = ['span', 'order', 'offset', 'push', 'pull', 'className', 'children', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'].reduce((result, item) => Object.assign(result, {[item]: true}), {});
   static fieldPropTypes = {
-    mode: PropTypes.oneOf(['form', 'edit', 'view', 'string']), // 默认取 form.mode ， form.mode 未定义则默认为 edit
+    mode: PropTypes.oneOf(['form', 'edit', 'view', 'string', 'concise']), // 默认取 form.mode ， form.mode 未定义则默认为 edit
     title: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     titleStyle: PropTypes.object,
     titleMode: PropTypes.oneOf(['none', 'left', 'leftColon', 'top', 'topColon']),
@@ -126,15 +126,16 @@ export default class Field extends React.Component {
     this.formContext = formContext || {};
     this.buildProps();
 
-    let {mode, titleMode, verify, value, defaultValue} = this.mergeProps;
+    let {mode, titleMode, verify, value, defaultValue, size} = this.mergeProps;
     if (mode === 'string') return this.renderValueString(value || value === 0 || value === false ? value : defaultValue);
 
-    let error = (verify && mode === 'form' ? this.error : null);
+    let error = (verify && (mode === 'form' || mode === 'concise') ? this.error : null);
     let modeClassName = `ws-field-${mode}`;
     let titleModeClassName = (titleMode === 'left' || titleMode === 'leftColon' ? 'ws-field-row' : '');
     let errorClassName = (error ? 'ws-field-has-error' : '');
+    let sizeClassName = `ws-field-${size || 'default'}`;
     return (
-      <Col {...this.colProps} className={`ws-field ${this.fieldClassName} ${modeClassName} ${titleModeClassName} ${errorClassName}`}>
+      <Col {...this.colProps} className={`ws-field ${this.fieldClassName} ${modeClassName} ${titleModeClassName} ${errorClassName} ${sizeClassName}`}>
         {this.renderTitle()}
         <div className='ws-field-detail-container'>
           <div className='ws-field-detail-row'>
