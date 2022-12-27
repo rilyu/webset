@@ -75,26 +75,30 @@ export default class BaseDialog extends React.Component {
     this.setState({closed: true, visible: false});
   }
 
+  async onCancel() {
+    if (!this.props.onCancel) return true;
+    this.setState({cancelling: true});
+    let result = await this.props.onCancel();
+    this.setState({cancelling: false});
+    return result !== false;
+  }
+
+  async onOk() {
+    if (!this.props.onOk) return true;
+    this.setState({submitting: true});
+    let result = await this.props.onOk();
+    this.setState({submitting: false});
+    return result !== false;
+  }
+
   async onCancelClick() {
     if (this.state.cancelling) return;
-    if (this.props.onCancel) {
-      this.setState({cancelling: true});
-      let result = await this.props.onCancel();
-      this.setState({cancelling: false});
-      if (result === false) return;
-    }
-    this.close();
+    if (await this.onCancel()) this.close();
   }
 
   async onOkClick() {
     if (this.state.submitting) return;
-    if (this.props.onOk) {
-      this.setState({submitting: true});
-      let result = await this.props.onOk();
-      this.setState({submitting: false});
-      if (result === false) return;
-    }
-    this.close();
+    if (await this.onOk()) this.close();
   }
 
   renderTitle() {

@@ -77,6 +77,10 @@ export default class BaseTree extends Field {
     return item ? `[${this.getId(item)}]${this.getName(item)}` : '';
   }
 
+  getSelectable(item) {
+    return item && (item.selectable !== false);
+  }
+
   getItem(value) {
     let {data} = this.state;
     if (!data) data = [];
@@ -113,7 +117,7 @@ export default class BaseTree extends Field {
       title = <span>{head}<span style={{color: '#f50'}}>{searchValue}</span>{tail}</span>;
     }
     return (
-      <TreeSelect.TreeNode value={this.getId(item)} title={title} data={item} key={this.getId(item)}>
+      <TreeSelect.TreeNode value={this.getId(item)} title={title} selectable={this.getSelectable(item)} data={item} key={this.getId(item)}>
         {subList.map(subNode => this.renderNode(subNode))}
       </TreeSelect.TreeNode>
     );

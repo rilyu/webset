@@ -48,10 +48,12 @@ export default class BaseEnum extends Field {
     this.setState({loading: true});
     try {
       let data = await this.fetchData();
-      if (this.props.onDataHandle) data = this.props.onDataHandle(data);
-      this.setState({loading: false, data, searchValue: null, pageIndex: 0});
+      if (this.isMount) {
+        if (this.props.onDataHandle) data = this.props.onDataHandle(data);
+        this.setState({loading: false, data, searchValue: null, pageIndex: 0});
+      }
     } catch(err) {
-      this.setState({loading: false});
+      this.isMount && this.setState({loading: false});
       console.error(err);
     }
   }
