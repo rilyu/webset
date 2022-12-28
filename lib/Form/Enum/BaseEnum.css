@@ -10,6 +10,11 @@
   box-shadow: 0 0 0 2px rgba(240, 65, 52, 0.2);
 }
 
+.ws-field-has-error .ant-select-auto-complete.ant-select .ant-input:focus,
+.ws-field-has-error .ant-select-auto-complete.ant-select .ant-input:hover {
+  border-color: #f46e65;
+}
+
 .ant-select-dropdown-menu-item.ws-select-pagination {
   display: flex;
   flex-direction: row;

@@ -15,6 +15,7 @@
   padding: 8px 8px;
 }
 .ws-edit-row .ant-input,
+.ws-edit-row .ant-input-number,
 .ws-edit-row .ant-select,
 .ws-edit-row .ant-select-selection--single {
   height: calc(1.5em + 16px);
@@ -40,6 +41,8 @@
   line-height: calc(1.5em + 16px);
 }
 .ws-edit-row .ant-input:focus,
+.ws-edit-row .ant-input-number:focus,
+.ws-edit-row .ant-input-number-focused,
 .ws-edit-row .ant-select:focus,
 .ws-edit-row .ant-select-selection:focus,
 .ws-edit-row .ant-select-open .ant-select-selection {
