@@ -1,6 +1,6 @@
 {
   "name": "webset",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "webset for react",
   "main": "lib/index.js",
   "dependencies": {

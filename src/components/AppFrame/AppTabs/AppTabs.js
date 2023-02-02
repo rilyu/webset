@@ -15,6 +15,7 @@ export default class AppTabs extends React.Component {
   static propTypes = {
     type: PropTypes.oneOf(['line', 'card']),
     navigator: PropTypes.object.isRequired,
+    tabBar: PropTypes.oneOf(['none', 'hide', 'show']), // none-无(仅单页)  hide-隐藏(多页)  show-显示(多页)
     fullScreen: PropTypes.bool,
     fullScreenAble: PropTypes.bool,
     fullScreenBar: PropTypes.oneOf(['auto', 'show', 'hide']),
@@ -23,6 +24,7 @@ export default class AppTabs extends React.Component {
 
   static defaultProps = {
     type: 'card',
+    tabBar: 'show',
     fullScreenAble: false,
     fullScreenBar: 'show',
   };
@@ -131,14 +133,14 @@ export default class AppTabs extends React.Component {
   }
 
   render() {
-    let {navigator, fullScreenAble, fullScreenBar, activeKey, type, tabBarExtraContent, className, children, onChange, ...others} = this.props;
+    let {navigator, tabBar, fullScreenAble, fullScreenBar, activeKey, type, tabBarExtraContent, className, children, onChange, ...others} = this.props;
     let {hideBar} = this.state;
     let {activePath, pageSet} = navigator.state;
     let pageSetClassName = pageSet[activePath] && pageSet[activePath].options.grayTab ? 'ws-app-tabs-gray' : '';
     let fullScreenClassName = `${this.fullScreen ? 'ws-full-screen' : ''} ${fullScreenBar === 'show' ? '' : 'ws-app-tabs-bar-auto'} ${fullScreenBar === 'hide' || hideBar ? 'ws-app-tabs-bar-hide' : ''}`;
     return (
       <FlexTabs
-        className={`ws-app-tabs ${pageSetClassName} ${fullScreenClassName} ${className || ''}`}
+        className={`ws-app-tabs ${tabBar === 'show' ? '' : 'ws-app-tabs-bar-none'} ${pageSetClassName} ${fullScreenClassName} ${className || ''}`}
         activeKey={activePath}
         type={type}
         tabBarExtraContent={this.renderTabBarExtraContent()}
@@ -146,7 +148,7 @@ export default class AppTabs extends React.Component {
         {...others}
         ref={v => this.flexTabs = v}
       >
-        {Object.keys(pageSet).map(key => this.renderPane(key))}
+        {(tabBar === 'none' ? [activePath].filter(Boolean) : Object.keys(pageSet)).map(key => this.renderPane(key))}
       </FlexTabs>
     );
   }

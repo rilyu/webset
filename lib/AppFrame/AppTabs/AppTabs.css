@@ -19,6 +19,9 @@
   margin: 0px;
   background-color: #eaedf1;
 }
+.ws-app-tabs.ws-app-tabs-bar-none.ant-tabs > .ant-tabs-bar {
+  display: none;
+}
 
 .ws-app-tabs.ant-tabs > .ant-tabs-content > .ant-tabs-tabpane {
   background-color: #fff;

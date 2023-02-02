@@ -27,6 +27,7 @@ export default class AppFrame extends React.Component {
     headerTail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     siderTrigger: PropTypes.element, // null for no trigger
     siderFooter: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    tabBar: PropTypes.oneOf(['none', 'hide', 'show']), // none-无(仅单页)  hide-隐藏(多页)  show-显示(多页)
     fullScreenAble: PropTypes.bool,
     fullScreenBar: PropTypes.oneOf(['auto', 'show', 'hide']),
   };
@@ -106,8 +107,8 @@ export default class AppFrame extends React.Component {
   }
 
   renderContent() {
-    let {fullScreenAble, fullScreenBar} = this.props;
-    return <this.constructor.Tabs navigator={this.props.navigator} fullScreenAble={fullScreenAble} fullScreenBar={fullScreenBar} />;
+    let {tabBar, fullScreenAble, fullScreenBar} = this.props;
+    return <this.constructor.Tabs navigator={this.props.navigator} tabBar={tabBar} fullScreenAble={fullScreenAble} fullScreenBar={fullScreenBar} />;
   }
 
   render() {
